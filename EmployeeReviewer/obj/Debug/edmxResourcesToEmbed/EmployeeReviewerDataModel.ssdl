@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EmployeeReviewModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Departments">
+    <Key>
+      <PropertyRef Name="DepartmentId" />
+    </Key>
+    <Property Name="DepartmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DepartmentName" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Employees">
+    <Key>
+      <PropertyRef Name="EmployeeId" />
+    </Key>
+    <Property Name="EmployeeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeName" Type="varchar(max)" Nullable="false" />
+    <Property Name="IsEmployed" Type="bit" Nullable="false" />
+    <Property Name="HireDate" Type="date" Nullable="false" />
+    <Property Name="LeaveDate" Type="date" />
+    <Property Name="PositionId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Positions">
+    <Key>
+      <PropertyRef Name="PositionId" />
+    </Key>
+    <Property Name="PositionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PositionName" Type="varchar(max)" Nullable="false" />
+    <Property Name="DepartmentId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Reviewers">
+    <Key>
+      <PropertyRef Name="ReviewerId" />
+    </Key>
+    <Property Name="ReviewerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Reviews">
+    <Key>
+      <PropertyRef Name="ReviewId" />
+    </Key>
+    <Property Name="ReviewId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" Nullable="false" />
+    <Property Name="ReviewerId" Type="int" Nullable="false" />
+    <Property Name="CreateDate" Type="date" Nullable="false" />
+    <Property Name="Summary" Type="varchar(max)" Nullable="false" />
+    <Property Name="EmployeeSigned" Type="bit" />
+    <Property Name="EmployerSigned" Type="bit" />
+    <Property Name="ReviewType" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ReviewTypes">
+    <Key>
+      <PropertyRef Name="ReviewId" />
+    </Key>
+    <Property Name="ReviewId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ReviewType" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'EmployeeReview.dbo.vw_AllReviewers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vw_AllReviewers">
+    <Key>
+      <PropertyRef Name="ReviewerId" />
+      <PropertyRef Name="EmployeeName" />
+    </Key>
+    <Property Name="ReviewerId" Type="int" Nullable="false" />
+    <Property Name="EmployeeName" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'EmployeeReview.dbo.vw_AllReviews' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vw_AllReviews">
+    <Key>
+      <PropertyRef Name="EmployeeName" />
+      <PropertyRef Name="ReviewerName" />
+      <PropertyRef Name="CreateDate" />
+      <PropertyRef Name="Summary" />
+      <PropertyRef Name="ReviewType" />
+      <PropertyRef Name="ReviewId" />
+    </Key>
+    <Property Name="EmployeeName" Type="varchar(max)" Nullable="false" />
+    <Property Name="ReviewerName" Type="varchar(max)" Nullable="false" />
+    <Property Name="CreateDate" Type="date" Nullable="false" />
+    <Property Name="Summary" Type="varchar(max)" Nullable="false" />
+    <Property Name="EmployeeSigned" Type="bit" />
+    <Property Name="EmployerSigned" Type="bit" />
+    <Property Name="ReviewType" Type="varchar(max)" Nullable="false" />
+    <Property Name="ReviewId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Employees__Posit__3E52440B">
+    <End Role="Positions" Type="Self.Positions" Multiplicity="1" />
+    <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Positions">
+        <PropertyRef Name="PositionId" />
+      </Principal>
+      <Dependent Role="Employees">
+        <PropertyRef Name="PositionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Positions__Depar__398D8EEE">
+    <End Role="Departments" Type="Self.Departments" Multiplicity="1" />
+    <End Role="Positions" Type="Self.Positions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Departments">
+        <PropertyRef Name="DepartmentId" />
+      </Principal>
+      <Dependent Role="Positions">
+        <PropertyRef Name="DepartmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Reviewers__Emplo__412EB0B6">
+    <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+    <End Role="Reviewers" Type="Self.Reviewers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employees">
+        <PropertyRef Name="EmployeeId" />
+      </Principal>
+      <Dependent Role="Reviewers">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Reviews__Employe__440B1D61">
+    <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+    <End Role="Reviews" Type="Self.Reviews" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employees">
+        <PropertyRef Name="EmployeeId" />
+      </Principal>
+      <Dependent Role="Reviews">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Reviews__Reviewe__44FF419A">
+    <End Role="Reviewers" Type="Self.Reviewers" Multiplicity="1" />
+    <End Role="Reviews" Type="Self.Reviews" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reviewers">
+        <PropertyRef Name="ReviewerId" />
+      </Principal>
+      <Dependent Role="Reviews">
+        <PropertyRef Name="ReviewerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Reviews__ReviewT__45F365D3">
+    <End Role="ReviewTypes" Type="Self.ReviewTypes" Multiplicity="1" />
+    <End Role="Reviews" Type="Self.Reviews" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ReviewTypes">
+        <PropertyRef Name="ReviewId" />
+      </Principal>
+      <Dependent Role="Reviews">
+        <PropertyRef Name="ReviewType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="EmployeeReviewModelStoreContainer">
+    <EntitySet Name="Departments" EntityType="Self.Departments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Positions" EntityType="Self.Positions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Reviewers" EntityType="Self.Reviewers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Reviews" EntityType="Self.Reviews" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ReviewTypes" EntityType="Self.ReviewTypes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="vw_AllReviewers" EntityType="Self.vw_AllReviewers" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vw_AllReviewers].[ReviewerId] AS [ReviewerId], 
+    [vw_AllReviewers].[EmployeeName] AS [EmployeeName]
+    FROM [dbo].[vw_AllReviewers] AS [vw_AllReviewers]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vw_AllReviews" EntityType="Self.vw_AllReviews" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vw_AllReviews].[EmployeeName] AS [EmployeeName], 
+    [vw_AllReviews].[ReviewerName] AS [ReviewerName], 
+    [vw_AllReviews].[CreateDate] AS [CreateDate], 
+    [vw_AllReviews].[Summary] AS [Summary], 
+    [vw_AllReviews].[EmployeeSigned] AS [EmployeeSigned], 
+    [vw_AllReviews].[EmployerSigned] AS [EmployerSigned], 
+    [vw_AllReviews].[ReviewType] AS [ReviewType], 
+    [vw_AllReviews].[ReviewId] AS [ReviewId]
+    FROM [dbo].[vw_AllReviews] AS [vw_AllReviews]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__Employees__Posit__3E52440B" Association="Self.FK__Employees__Posit__3E52440B">
+      <End Role="Positions" EntitySet="Positions" />
+      <End Role="Employees" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Positions__Depar__398D8EEE" Association="Self.FK__Positions__Depar__398D8EEE">
+      <End Role="Departments" EntitySet="Departments" />
+      <End Role="Positions" EntitySet="Positions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Reviewers__Emplo__412EB0B6" Association="Self.FK__Reviewers__Emplo__412EB0B6">
+      <End Role="Employees" EntitySet="Employees" />
+      <End Role="Reviewers" EntitySet="Reviewers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Reviews__Employe__440B1D61" Association="Self.FK__Reviews__Employe__440B1D61">
+      <End Role="Employees" EntitySet="Employees" />
+      <End Role="Reviews" EntitySet="Reviews" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Reviews__Reviewe__44FF419A" Association="Self.FK__Reviews__Reviewe__44FF419A">
+      <End Role="Reviewers" EntitySet="Reviewers" />
+      <End Role="Reviews" EntitySet="Reviews" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Reviews__ReviewT__45F365D3" Association="Self.FK__Reviews__ReviewT__45F365D3">
+      <End Role="ReviewTypes" EntitySet="ReviewTypes" />
+      <End Role="Reviews" EntitySet="Reviews" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

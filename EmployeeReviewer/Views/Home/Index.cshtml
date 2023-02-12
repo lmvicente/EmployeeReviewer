@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "EmployeeReviewer - #1 evaluation software";
+}
+
+<div class="jumbotron">
+    <h1>EmployeeReviewer</h1>
+    <p class="lead">EmployeeReviewer creates an easy-to-use web application to leave reviews for your employees and store it for historical purposes.</p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Getting started</h2>
+        <p>
+            To view the current demo, click below. This will take you to the "Reviews" page which will let you see all current reviews stored in the database. You can also create, edit, and delete the reviews as needed.
+        </p>
+        <p>@Html.ActionLink("All Reviews","Index", "Reviews", null,new {@class = "btn btn-primary"})
+        
+        @*<a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a>*@</p>
+    </div>

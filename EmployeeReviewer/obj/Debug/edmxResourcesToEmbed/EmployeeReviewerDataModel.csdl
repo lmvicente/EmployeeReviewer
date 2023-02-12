@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EmployeeReviewModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="DepartmentId" />
+    </Key>
+    <Property Name="DepartmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DepartmentName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Positions" Relationship="Self.FK__Positions__Depar__398D8EEE" FromRole="Departments" ToRole="Positions" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="EmployeeId" />
+    </Key>
+    <Property Name="EmployeeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmployeeName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IsEmployed" Type="Boolean" Nullable="false" />
+    <Property Name="HireDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="LeaveDate" Type="DateTime" Precision="0" />
+    <Property Name="PositionId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Position" Relationship="Self.FK__Employees__Posit__3E52440B" FromRole="Employees" ToRole="Positions" />
+    <NavigationProperty Name="Reviewers" Relationship="Self.FK__Reviewers__Emplo__412EB0B6" FromRole="Employees" ToRole="Reviewers" />
+    <NavigationProperty Name="Reviews" Relationship="Self.FK__Reviews__Employe__440B1D61" FromRole="Employees" ToRole="Reviews" />
+  </EntityType>
+  <EntityType Name="Position">
+    <Key>
+      <PropertyRef Name="PositionId" />
+    </Key>
+    <Property Name="PositionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PositionName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Department" Relationship="Self.FK__Positions__Depar__398D8EEE" FromRole="Positions" ToRole="Departments" />
+    <NavigationProperty Name="Employees" Relationship="Self.FK__Employees__Posit__3E52440B" FromRole="Positions" ToRole="Employees" />
+  </EntityType>
+  <EntityType Name="Reviewer">
+    <Key>
+      <PropertyRef Name="ReviewerId" />
+    </Key>
+    <Property Name="ReviewerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK__Reviewers__Emplo__412EB0B6" FromRole="Reviewers" ToRole="Employees" />
+    <NavigationProperty Name="Reviews" Relationship="Self.FK__Reviews__Reviewe__44FF419A" FromRole="Reviewers" ToRole="Reviews" />
+  </EntityType>
+  <EntityType Name="Review">
+    <Key>
+      <PropertyRef Name="ReviewId" />
+    </Key>
+    <Property Name="ReviewId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+    <Property Name="ReviewerId" Type="Int32" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="EmployeeSigned" Type="Boolean" />
+    <Property Name="EmployerSigned" Type="Boolean" />
+    <Property Name="ReviewType" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK__Reviews__Employe__440B1D61" FromRole="Reviews" ToRole="Employees" />
+    <NavigationProperty Name="Reviewer" Relationship="Self.FK__Reviews__Reviewe__44FF419A" FromRole="Reviews" ToRole="Reviewers" />
+    <NavigationProperty Name="ReviewType1" Relationship="Self.FK__Reviews__ReviewT__45F365D3" FromRole="Reviews" ToRole="ReviewTypes" />
+  </EntityType>
+  <EntityType Name="ReviewType">
+    <Key>
+      <PropertyRef Name="ReviewId" />
+    </Key>
+    <Property Name="ReviewId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ReviewType1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Reviews" Relationship="Self.FK__Reviews__ReviewT__45F365D3" FromRole="ReviewTypes" ToRole="Reviews" />
+  </EntityType>
+  <EntityType Name="vw_AllReviewers">
+    <Key>
+      <PropertyRef Name="ReviewerId" />
+      <PropertyRef Name="EmployeeName" />
+    </Key>
+    <Property Name="ReviewerId" Type="Int32" Nullable="false" />
+    <Property Name="EmployeeName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="vw_AllReviews">
+    <Key>
+      <PropertyRef Name="EmployeeName" />
+      <PropertyRef Name="ReviewerName" />
+      <PropertyRef Name="CreateDate" />
+      <PropertyRef Name="Summary" />
+      <PropertyRef Name="ReviewType" />
+      <PropertyRef Name="ReviewId" />
+    </Key>
+    <Property Name="EmployeeName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ReviewerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="EmployeeSigned" Type="Boolean" />
+    <Property Name="EmployerSigned" Type="Boolean" />
+    <Property Name="ReviewType" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ReviewId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Positions__Depar__398D8EEE">
+    <End Role="Departments" Type="Self.Department" Multiplicity="1" />
+    <End Role="Positions" Type="Self.Position" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Departments">
+        <PropertyRef Name="DepartmentId" />
+      </Principal>
+      <Dependent Role="Positions">
+        <PropertyRef Name="DepartmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Employees__Posit__3E52440B">
+    <End Role="Positions" Type="Self.Position" Multiplicity="1" />
+    <End Role="Employees" Type="Self.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Positions">
+        <PropertyRef Name="PositionId" />
+      </Principal>
+      <Dependent Role="Employees">
+        <PropertyRef Name="PositionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Reviewers__Emplo__412EB0B6">
+    <End Role="Employees" Type="Self.Employee" Multiplicity="1" />
+    <End Role="Reviewers" Type="Self.Reviewer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employees">
+        <PropertyRef Name="EmployeeId" />
+      </Principal>
+      <Dependent Role="Reviewers">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Reviews__Employe__440B1D61">
+    <End Role="Employees" Type="Self.Employee" Multiplicity="1" />
+    <End Role="Reviews" Type="Self.Review" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employees">
+        <PropertyRef Name="EmployeeId" />
+      </Principal>
+      <Dependent Role="Reviews">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Reviews__Reviewe__44FF419A">
+    <End Role="Reviewers" Type="Self.Reviewer" Multiplicity="1" />
+    <End Role="Reviews" Type="Self.Review" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reviewers">
+        <PropertyRef Name="ReviewerId" />
+      </Principal>
+      <Dependent Role="Reviews">
+        <PropertyRef Name="ReviewerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Reviews__ReviewT__45F365D3">
+    <End Role="ReviewTypes" Type="Self.ReviewType" Multiplicity="1" />
+    <End Role="Reviews" Type="Self.Review" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ReviewTypes">
+        <PropertyRef Name="ReviewId" />
+      </Principal>
+      <Dependent Role="Reviews">
+        <PropertyRef Name="ReviewType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="EmployeeReviewEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Departments" EntityType="Self.Department" />
+    <EntitySet Name="Employees" EntityType="Self.Employee" />
+    <EntitySet Name="Positions" EntityType="Self.Position" />
+    <EntitySet Name="Reviewers" EntityType="Self.Reviewer" />
+    <EntitySet Name="Reviews" EntityType="Self.Review" />
+    <EntitySet Name="ReviewTypes" EntityType="Self.ReviewType" />
+    <EntitySet Name="vw_AllReviewers" EntityType="Self.vw_AllReviewers" />
+    <EntitySet Name="vw_AllReviews" EntityType="Self.vw_AllReviews" />
+    <AssociationSet Name="FK__Positions__Depar__398D8EEE" Association="Self.FK__Positions__Depar__398D8EEE">
+      <End Role="Departments" EntitySet="Departments" />
+      <End Role="Positions" EntitySet="Positions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Employees__Posit__3E52440B" Association="Self.FK__Employees__Posit__3E52440B">
+      <End Role="Positions" EntitySet="Positions" />
+      <End Role="Employees" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Reviewers__Emplo__412EB0B6" Association="Self.FK__Reviewers__Emplo__412EB0B6">
+      <End Role="Employees" EntitySet="Employees" />
+      <End Role="Reviewers" EntitySet="Reviewers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Reviews__Employe__440B1D61" Association="Self.FK__Reviews__Employe__440B1D61">
+      <End Role="Employees" EntitySet="Employees" />
+      <End Role="Reviews" EntitySet="Reviews" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Reviews__Reviewe__44FF419A" Association="Self.FK__Reviews__Reviewe__44FF419A">
+      <End Role="Reviewers" EntitySet="Reviewers" />
+      <End Role="Reviews" EntitySet="Reviews" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Reviews__ReviewT__45F365D3" Association="Self.FK__Reviews__ReviewT__45F365D3">
+      <End Role="ReviewTypes" EntitySet="ReviewTypes" />
+      <End Role="Reviews" EntitySet="Reviews" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

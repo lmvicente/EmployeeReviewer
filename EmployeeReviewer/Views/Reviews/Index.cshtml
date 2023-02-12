@@ -1,0 +1,92 @@
+﻿@model IEnumerable<EmployeeReviewer.vw_AllReviews>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+</p>
+
+
+    <form asp-controller="Reviews" asp-action="Index" method="get" class="mb-3">
+        <div class="form-row">
+            <div class="col">
+                <input type="text" name="SearchName" class="form-control" placeholder="Search by employee name ">
+            </div>
+            <div class="col">
+                <input type="text" name="ReviewerName" class="form-control" placeholder="Search by reviewer name ">
+            </div>
+            <div class="col">
+                <input type="date" name="CreateDate" class="form-control" placeholder="Search by date created ">
+            </div>
+            <div class="col-1">
+                <input type="submit" class="btn btn-primary" style="width:100%" value="Search" />
+            </div>
+        </div>
+        
+    </form>
+
+    <table class="table table-hover" id="ReviewTable">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.EmployeeName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ReviewerName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreateDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Summary)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EmployeeSigned)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EmployerSigned)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ReviewType)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReviewerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Summary)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeeSigned)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployerSigned)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReviewType)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ReviewId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ReviewId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ReviewId })
+                </td>
+            </tr>
+        }
+
+    </table>

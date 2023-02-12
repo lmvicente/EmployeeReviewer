@@ -1,0 +1,74 @@
+﻿@model EmployeeReviewer.Review
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Review</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Summary)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Summary)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeeSigned)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeSigned)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployerSigned)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmployerSigned)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Employee.EmployeeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Employee.EmployeeName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Reviewer.ReviewerId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reviewer.ReviewerId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReviewType1.ReviewType1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReviewType1.ReviewType1)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ReviewId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
