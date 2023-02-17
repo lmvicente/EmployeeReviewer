@@ -11,7 +11,7 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.CreateDate)
+            Date Created
         </dt>
 
         <dd>
@@ -43,7 +43,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Employee.EmployeeName)
+            Employee Name
         </dt>
 
         <dd>
@@ -51,24 +51,23 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Reviewer.ReviewerId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Reviewer.ReviewerId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ReviewType1.ReviewType1)
+            Review Type
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.ReviewType1.ReviewType1)
         </dd>
 
+        <dt>
+            Reviewer Name
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Reviewer.Employee.EmployeeName)
+        </dd>
+
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ReviewId }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ReviewId }, new { @class = "btn btn-warning" })
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-dark" })
 </p>

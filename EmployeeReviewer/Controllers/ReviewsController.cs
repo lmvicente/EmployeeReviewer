@@ -16,7 +16,7 @@ namespace EmployeeReviewer.Controllers
     {
         private EmployeeReviewEntities db = new EmployeeReviewEntities();
 
-        public async Task<ActionResult> Index(string SearchName)
+        public async Task<ActionResult> Index(string SearchName, string ReviewerName)
         {
             if (db.vw_AllReviews == null)
             {
@@ -26,9 +26,15 @@ namespace EmployeeReviewer.Controllers
             var reviews = from r in db.vw_AllReviews
                           select r;
 
+
             if (!String.IsNullOrEmpty(SearchName))
             {
                 reviews = reviews.Where(st => st.EmployeeName.Contains(SearchName));
+            }
+
+            if (!String.IsNullOrEmpty(ReviewerName))
+            {
+                reviews = reviews = reviews.Where(st => st.ReviewerName.Contains(ReviewerName));
             }
 
             return View(await reviews.ToListAsync());

@@ -11,7 +11,7 @@ namespace EmployeeReviewer
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
     public partial class Review
     {
         public int ReviewId { get; set; }

@@ -216,6 +216,9 @@
     <Content Include="EmployeeReviewerDataModel.edmx.diagram">
       <DependentUpon>EmployeeReviewerDataModel.edmx</DependentUpon>
     </Content>
+    <Content Include="Images\delete.png" />
+    <Content Include="Images\details.png" />
+    <Content Include="Images\edit.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -266,8 +269,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Reviews\Create.cshtml" />
     <Content Include="Views\Reviews\Delete.cshtml" />

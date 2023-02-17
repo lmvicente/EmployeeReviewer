@@ -29,3 +29,11 @@ textarea {
     border-color: #fff
 }
 
+/* Add an ellipsis using CSSS */
+.text-short {
+    display: inline-block;
+    max-width: 150px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}

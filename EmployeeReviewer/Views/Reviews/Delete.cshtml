@@ -12,7 +12,7 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.CreateDate)
+            Create Date
         </dt>
 
         <dd>
@@ -52,15 +52,15 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Reviewer.ReviewerId)
+            Reviewr Name
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Reviewer.ReviewerId)
+            @Html.DisplayFor(model => model.Reviewer.Employee.EmployeeName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ReviewType1.ReviewType1)
+            Review Type
         </dt>
 
         <dd>
@@ -72,9 +72,11 @@
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
+<div class="form-actions no-color">
+    <div class="form-row">
+        <input type="submit" value="Delete" class="btn btn-danger mr-2" />
+        <a href="@Url.Action("Index", "Reviews")" class="btn btn-dark">Back to List</a>
+    </div>
+</div>
     }
 </div>
