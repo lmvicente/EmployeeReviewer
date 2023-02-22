@@ -1,5 +1,5 @@
 # EmployeeReviewer
-Using C#, Entity Framework, HTML/CSS (Bootstrap), MVC pattern, and SQL we created an Employee Reviewer web application. With this web application, you can input all your employees, departments, and job titles into the SQL database. From there, you can select the employees who are able to review employees. Using Entity Framework, this is then setup for you to easily leave reviews for each of your employees. 
+Using C#, Entity Framework, HTML/CSS (Bootstrap), MVC pattern, and SQL I created an Employee Reviewer web application. With this web application, you can input all your employees, departments, and job titles into the SQL database. From there, you can select the employees who are able to review employees. Using Entity Framework, this is then setup for you to easily leave reviews for each of your employees. 
 
 ![EmployeeReviewer](https://raw.githubusercontent.com/lmvicente/EmployeeReviewer/main/GIFs/chrome-capture-2023-1-17.png)
 
@@ -21,7 +21,7 @@ Although there is also a Delete View that is operational, I wanted to use the mo
 
 ### Viewing A Review
 ![ViewingReview](https://raw.githubusercontent.com/lmvicente/EmployeeReviewer/main/GIFs/chrome-capture-2023-1-17%20(4).gif)
-Along with the other CUD operations, we finally have R, or read, to complete CRUD. To view a specific review in more detail, you can click on the "View" button to get a closer look at your chosen review.
+Along with the other CUD operations, I finally have R, or read, to complete CRUD. To view a specific review in more detail, you can click on the "View" button to get a closer look at your chosen review.
 
 ## Version History
 * 0.1 -- 2/17/2023
